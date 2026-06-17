@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Clock</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    background:linear-gradient(135deg,#0f172a,#1e293b);
+    color:white;
+}
+
+.container{
+    text-align:center;
+    padding:40px;
+    border-radius:20px;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(15px);
+    box-shadow:0 0 25px rgba(0,0,0,0.3);
+}
+
+h1{
+    margin-bottom:20px;
+    font-size:2.5rem;
+}
+
+.clock{
+    font-size:4rem;
+    font-weight:bold;
+    color:#38bdf8;
+}
+
+.date{
+    margin-top:15px;
+    font-size:1.2rem;
+    color:#cbd5e1;
+}
+
+.greeting{
+    margin-top:20px;
+    font-size:1.5rem;
+    color:#facc15;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Digital Clock</h1>
+    <div class="clock" id="clock">00:00:00</div>
+    <div class="date" id="date"></div>
+    <div class="greeting" id="greeting"></div>
+</div>
+
+<script>
+function updateClock(){
+    const now = new Date();
+
+    const h = String(now.getHours()).padStart(2,"0");
+    const m = String(now.getMinutes()).padStart(2,"0");
+    const s = String(now.getSeconds()).padStart(2,"0");
+
+    document.getElementById("clock").textContent = `${h}:${m}:${s}`;
+
+    document.getElementById("date").textContent =
+        now.toDateString();
+
+    let greeting = "";
+
+    if(now.getHours() < 12){
+        greeting = "Good Morning ☀️";
+    }else if(now.getHours() < 18){
+        greeting = "Good Afternoon 🌤️";
+    }else{
+        greeting = "Good Evening 🌙";
+    }
+
+    document.getElementById("greeting").textContent = greeting;
+}
+
+setInterval(updateClock,1000);
+updateClock();
+</script>
+
+</body>
+</html>
